@@ -3,7 +3,10 @@ package bean;
 import dao.TipoAnimalDAO;
 import dao.VeterinarioDAO;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -22,6 +25,13 @@ public class UserBean implements Serializable {
 
     TipoAnimal tipoSelecionado;
     Veterinario veterinarioSelecionado;
+    String nomeTutor;
+    String telefonetutor;
+    String nomeAnimal;
+    String motivo;
+    Date horario;
+    
+    
 
     @Inject
     TipoAnimalDAO tiposDAO;
@@ -39,7 +49,7 @@ public class UserBean implements Serializable {
     }
 
     public void setTipoSelecionado(TipoAnimal tipoSelecionado) {
-        System.out.println("Setou o valor TipoAnimal");
+        
         this.tipoSelecionado = tipoSelecionado;
     }
 
@@ -52,7 +62,7 @@ public class UserBean implements Serializable {
     }
 
     public LinkedList<SelectItem> getVeterinarioSelectItems() {
-        System.out.println("Puxou o valor do SelectItems");
+        
         if (tipoSelecionado == null) {
             veterinarioSelectItems = new LinkedList<>();
             veterinarioSelectItems.add(
@@ -72,16 +82,56 @@ public class UserBean implements Serializable {
         this.veterinarioSelectItems = veterinarioSelectItems;
     }
 
-    @Produces
-    public VeterinarioDAO instanceVeterinario() {
+    public String getNomeTutor() {
+        return nomeTutor;
+    }
+
+    public void setNomeTutor(String nomeTutor) {
+        this.nomeTutor = nomeTutor;
+    }
+
+    public String getTelefonetutor() {
+        return telefonetutor;
+    }
+
+    public void setTelefonetutor(String telefonetutor) {
+        this.telefonetutor = telefonetutor;
+    }
+
+    public String getNomeAnimal() {
+        return nomeAnimal;
+    }
+
+    public void setNomeAnimal(String nomeAnimal) {
+        this.nomeAnimal = nomeAnimal;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public Date getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Date horario) {
+        this.horario = horario;
+    }
+    
+    
+
+    @Produces VeterinarioDAO instanceVeterinario() {
         if (vetDAO == null) {
             vetDAO = new VeterinarioDAO();
         }
         return vetDAO;
     }
     
-    @Produces
-    public TipoAnimalDAO instanceTipoAnimal() {
+    @Produces TipoAnimalDAO instanceTipoAnimal() {
         if (tiposDAO == null) {
             tiposDAO = new TipoAnimalDAO();
         }

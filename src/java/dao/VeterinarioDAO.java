@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.enterprise.inject.Model;
 import javax.faces.model.SelectItem;
 import model.Veterinario;
 
@@ -11,6 +12,7 @@ import model.Veterinario;
  *
  * @author andre
  */
+
 public class VeterinarioDAO implements Serializable {
 
     LinkedList<Veterinario> veterinarioList = null;
