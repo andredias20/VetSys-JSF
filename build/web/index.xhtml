@@ -16,6 +16,8 @@
                                  id="animalType" 
                                  value="#{userBean.tipoSelecionado}">
                     <f:selectItems value="#{agendaBean.selectItemsTipoAnimal}"/>
+                    
+                    <p:ajax event="change" update="veterinario"/>
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="veterinario" value="Veterinario: "/>
@@ -23,7 +25,6 @@
                                  id="veterinario"
                                  value="#{userBean.veterinarioSelecionado}">
                     <f:selectItems value="#{userBean.veterinarioSelectItems}"/>
-                    <p:ajax />
                 </p:selectOneMenu>
             </p:panelGrid>
         </h:form>

@@ -9,12 +9,10 @@ import model.TipoAnimal;
  *
  * @author andre
  */
-
-
 public class TipoAnimalDAO implements Serializable {
 
-    private static LinkedList<TipoAnimal> tipoAnimalList = null;
-    private LinkedList<SelectItem> tipoAnimalSelectItem = null;
+    LinkedList<TipoAnimal> tipoAnimalList = null;
+    LinkedList<SelectItem> tipoAnimalSelectItem = null;
 
     public TipoAnimalDAO() {
         System.out.println("Criando TipoAnimalDAO");
@@ -47,6 +45,7 @@ public class TipoAnimalDAO implements Serializable {
     }
 
     public LinkedList<SelectItem> getSelectItems() {
+        processSelectItems();
         return tipoAnimalSelectItem;
     }
 
@@ -59,8 +58,9 @@ public class TipoAnimalDAO implements Serializable {
         System.out.println("Processando seletores");
         tipoAnimalSelectItem = new LinkedList<SelectItem>();
         tipoAnimalSelectItem.add(new SelectItem(null, "Selecione um tipo"));
-        tipoAnimalList.forEach(tipoAnimal
-                -> tipoAnimalSelectItem.add(new SelectItem(tipoAnimal, tipoAnimal.getNome())));
+        tipoAnimalList.forEach(tipoAnimal -> {
+            tipoAnimalSelectItem.add(new SelectItem(tipoAnimal, tipoAnimal.getNome()));
+        });
     }
 
 }

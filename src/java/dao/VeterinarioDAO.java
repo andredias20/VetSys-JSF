@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
+import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.model.SelectItem;
 import model.Veterinario;
@@ -14,44 +11,43 @@ import model.Veterinario;
  *
  * @author andre
  */
-public class VeterinarioDAO {
-    
-    private LinkedList<Veterinario> veterinarioList;
-    private LinkedList<SelectItem> veterinarioSelectItems;
-    
-    public VeterinarioDAO(){
+public class VeterinarioDAO implements Serializable {
+
+    LinkedList<Veterinario> veterinarioList = null;
+    LinkedList<SelectItem> veterinarioSelectItems = null;
+
+    public VeterinarioDAO() {
         System.out.println("Criando VeterinarioDAO");
         System.out.flush();
-        
-        if(veterinarioList == null){
-            veterinarioList = new LinkedList<>();
-            
-            veterinarioList.add(new Veterinario(1, "Dr. Carlos", 1));
-            veterinarioList.add(new Veterinario(2, "Dra. Vanessa", 1));
-            veterinarioList.add(new Veterinario(3, "Dra. Thais", 2));
-            veterinarioList.add(new Veterinario(4, "Dr. Gabriel", 2));
-            
-            processSelectItems();
-        }
+
+        veterinarioList = new LinkedList<Veterinario>();
+        veterinarioList.add(new Veterinario(1, "Dr. Carlos", 1));
+        veterinarioList.add(new Veterinario(2, "Dra. Vanessa", 1));
+        veterinarioList.add(new Veterinario(3, "Dra. Thais", 2));
+        veterinarioList.add(new Veterinario(4, "Dr. Gabriel", 2));
+
+        processSelectItems();
     }
-    
-    public Veterinario searchVeterinario(int id){
+
+    public Veterinario searchVeterinario(int id) {
         return veterinarioList
                 .stream()
                 .filter(vet -> vet.getId() == id)
                 .findFirst()
                 .get();
     }
-    
-    public LinkedList<Veterinario> searchVeterinariosByAnimalType(int id){
-        return (LinkedList) veterinarioList
+
+    public List<Veterinario> searchVeterinariosByAnimalType(int id) {
+       return veterinarioList
                 .stream()
                 .filter(vet -> vet.getId() == id)
                 .collect(Collectors.toList());
+        
+        
     }
-    
-    public LinkedList<SelectItem> getSelectItems(int id){
-        LinkedList<Veterinario> vetList = searchVeterinariosByAnimalType(id);
+
+    public LinkedList<SelectItem> getSelectItems(int id) {
+        List<Veterinario> vetList = searchVeterinariosByAnimalType(id);
         return processSelectItems(vetList);
     }
 
@@ -63,23 +59,22 @@ public class VeterinarioDAO {
         this.veterinarioList = veterinarioList;
         processSelectItems();
     }
-    
-    
-    
-    private void processSelectItems(){
-        veterinarioSelectItems = new LinkedList<>();
-        
+
+    private void processSelectItems() {
+        veterinarioSelectItems = new LinkedList<SelectItem>();
+
         veterinarioSelectItems.add(new SelectItem(null, "Selecione um Veterinario"));
-        veterinarioList.forEach(vet -> 
-                veterinarioSelectItems.add(new SelectItem(vet, vet.getNome())));
+        veterinarioList.forEach(vet
+                -> veterinarioSelectItems.add(new SelectItem(vet, vet.getNome())));
     }
-    private LinkedList<SelectItem> processSelectItems(LinkedList<Veterinario> list){
-        LinkedList<SelectItem> vetSelectItems = new LinkedList<>();
-        
+
+    private LinkedList<SelectItem> processSelectItems(List<Veterinario> list) {
+        LinkedList<SelectItem> vetSelectItems = new LinkedList<SelectItem>();
+
         vetSelectItems.add(new SelectItem(null, "Selecione um Veterinario"));
-        list.forEach(vet -> 
-                vetSelectItems.add(new SelectItem(vet, vet.getNome())));
-        
+        list.forEach(vet
+                -> vetSelectItems.add(new SelectItem(vet, vet.getNome())));
+
         return vetSelectItems;
     }
 }
