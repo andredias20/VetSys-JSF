@@ -11,15 +11,25 @@ public class Agendamento {
     
     private int id;
     private int veterinario_id;
+    private int tipo_id;
     private Date horario;
     private Paciente paciente;
 
     public Agendamento() {
     }
 
-    public Agendamento(int id, int veterinario_id, Date horario, Paciente paciente) {
+    public Agendamento(int id, int veterinario_id, int tipo_id, Date horario, Paciente paciente) {
         this.id = id;
         this.veterinario_id = veterinario_id;
+        this.tipo_id = tipo_id;
+        this.horario = horario;
+        this.paciente = paciente;
+    }
+
+    public Agendamento(int veterinario_id, int tipo_id, Date horario, Paciente paciente) {
+        this.id = 0;
+        this.veterinario_id = veterinario_id;
+        this.tipo_id = tipo_id;
         this.horario = horario;
         this.paciente = paciente;
     }
@@ -56,16 +66,19 @@ public class Agendamento {
         this.paciente = paciente;
     }
 
-    @Override
-    public String toString() {
-        return "Agendamento{" + "id=" + id + ", veterinario_id=" + veterinario_id + ", horario=" + horario + ", paciente=" + paciente + '}';
+    public int getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(int tipo_id) {
+        this.tipo_id = tipo_id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + this.veterinario_id;
-        hash = 83 * hash + Objects.hashCode(this.horario);
+        int hash = 3;
+        hash = 97 * hash + this.veterinario_id;
+        hash = 97 * hash + Objects.hashCode(this.horario);
         return hash;
     }
 
@@ -84,12 +97,8 @@ public class Agendamento {
         if (this.veterinario_id != other.veterinario_id) {
             return false;
         }
-        if (!Objects.equals(this.horario, other.horario)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.horario, other.horario);
     }
-    
     
     
 }

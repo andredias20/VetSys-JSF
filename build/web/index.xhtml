@@ -45,10 +45,10 @@
                 <p:inputText id="motivo" value="#{userBean.motivo}"
                              required="true"
                              requiredMessage="O nome do motivo é obrigatorio."/>
-                
-                
+
+
                 <p:outputLabel for="telefoneTutor" value="Telefone Tutor: "/>
-                
+
                 <h:panelGroup layout="block">
                     <p:inputMask id="telefoneTutor"
                                  required="true"
@@ -56,16 +56,50 @@
                                  value="#{userBean.telefonetutor}" 
                                  mask="(99) 9 9999-9999" />
                 </h:panelGroup>
-                
+
                 <p:outputLabel for="horario" value="Data/Hora"/>
                 <h:panelGroup >
-                    <p:calendar id="horario" value="#{userBean.horario}" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:calendar id="horario" 
+                                value="#{userBean.horario}" 
+                                pattern="dd/MM/yyyy HH:mm"
+                                validator="#{agendamentoDateValidator}"
+                                validatorMessage="O funcionamento da clinica ocorre somente de Terça a Quinta das 08:00 até as 17:45 (15min de intervalo)"/>
                 </h:panelGroup>
             </p:panelGrid>
-            <h:commandButton type="submit" value="Marcar" />
-            <h:commandButton type="submit" value="Limpar" />
+            <h:commandButton type="submit" value="Marcar" action="#{userBean.criar}"/>
+            <h:commandButton type="submit" value="Limpar" action="#{userBean.limpar}"/>
         </h:form>
-            
+
+        <p:dataTable id="tabAgendamentos" 
+                     value="#{agendaBean.listAgendamento}" var="item">
+
+            <p:column headerText="Data/Hora">
+                <h:outputText value="#{item.horario}"/>
+            </p:column>
+            <p:column headerText="Veterinario">
+                <h:outputText value="#{agendaBean.getVeterinarioById(item.veterinario_id).nome}"/>
+            </p:column>
+            <p:column headerText="Tipo Animal">
+                <h:outputText value="#{agendaBean.getTipoAnimalById(item.tipo_id).nome}"/>
+            </p:column>
+            <p:column headerText="Nome Animal">
+                <h:outputText value="#{item.paciente.nomeAnimal}"/>
+            </p:column>
+            <p:column headerText="Tutor">
+                <h:outputText value="#{item.paciente.nomeTutor}"/>
+            </p:column>
+            <p:column headerText="Motivo">
+                <h:outputText value="#{item.paciente.descricaoMotivo}"/>
+            </p:column>
+            <p:column headerText="Telefone">
+                <h:outputText value="#{item.paciente.telefoneTutor}"/>
+            </p:column>
+            <p:column>
+                <h:form>
+                    <h:commandButton type="submit" action="#{userBean.cancelar(item)}" value="Cancelar"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>
 

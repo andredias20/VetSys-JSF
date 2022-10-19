@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ import model.Paciente;
  *
  * @author andre
  */
-public class AgendamentoDAO {
+public class AgendamentoDAO implements Serializable{
 
     private LinkedList<Agendamento> agendamentosList;
 
@@ -23,9 +24,11 @@ public class AgendamentoDAO {
         if (agendamentosList == null) {
             //Puxar itens gravados no 'arquivos/database'
             agendamentosList = new LinkedList<>();
-            agendamentosList.add(new Agendamento(1,
+            agendamentosList.add(new Agendamento(
                     1,
-                    Date.from(Instant.MIN), 
+                    1,
+                    1,
+                    new Date(), 
                     new Paciente("Cachorrinho", "Probleminhas", "Carlos", "(45) 9 9833-8540"))
             );
         }
@@ -43,6 +46,9 @@ public class AgendamentoDAO {
         if (agendamentosList.contains(e)) {
             return;
         } else {
+            if(e.getId() == 0){
+                e.setId(agendamentosList.size()+1);
+            }
             agendamentosList.add(e);
         }
     }

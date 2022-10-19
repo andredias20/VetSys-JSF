@@ -1,17 +1,18 @@
 package bean;
 
+import dao.AgendamentoDAO;
 import dao.TipoAnimalDAO;
 import dao.VeterinarioDAO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import model.Agendamento;
+import model.Paciente;
 import model.TipoAnimal;
 import model.Veterinario;
 
@@ -30,14 +31,15 @@ public class UserBean implements Serializable {
     String nomeAnimal;
     String motivo;
     Date horario;
-    
-    
 
     @Inject
     TipoAnimalDAO tiposDAO;
-    
+
     @Inject
     VeterinarioDAO vetDAO;
+
+    @Inject
+    AgendamentoDAO agendaDAO;
 
     LinkedList<SelectItem> veterinarioSelectItems;
 
@@ -49,7 +51,7 @@ public class UserBean implements Serializable {
     }
 
     public void setTipoSelecionado(TipoAnimal tipoSelecionado) {
-        
+
         this.tipoSelecionado = tipoSelecionado;
     }
 
@@ -62,7 +64,7 @@ public class UserBean implements Serializable {
     }
 
     public LinkedList<SelectItem> getVeterinarioSelectItems() {
-        
+
         if (tipoSelecionado == null) {
             veterinarioSelectItems = new LinkedList<>();
             veterinarioSelectItems.add(
@@ -121,17 +123,41 @@ public class UserBean implements Serializable {
     public void setHorario(Date horario) {
         this.horario = horario;
     }
-    
-    
 
-    @Produces VeterinarioDAO instanceVeterinario() {
+    public void criar() {
+        Agendamento agendamento = new Agendamento(
+                veterinarioSelecionado.getId(),
+                tipoSelecionado.getId(),
+                horario,
+                new Paciente(nomeAnimal, motivo, nomeTutor, telefonetutor)
+        );
+        agendaDAO.addAgendamento(agendamento);
+    }
+
+    public void limpar() {
+        tipoSelecionado = null;
+        veterinarioSelecionado = null;
+        nomeTutor = null;
+        telefonetutor = null;
+        nomeAnimal = null;
+        motivo = null;
+        horario = null;
+    }
+    
+    public void cancelar(Agendamento e){
+        agendaDAO.removeAgendamento(e);
+    }
+
+    @Produces
+    VeterinarioDAO instanceVeterinario() {
         if (vetDAO == null) {
             vetDAO = new VeterinarioDAO();
         }
         return vetDAO;
     }
-    
-    @Produces TipoAnimalDAO instanceTipoAnimal() {
+
+    @Produces
+    TipoAnimalDAO instanceTipoAnimal() {
         if (tiposDAO == null) {
             tiposDAO = new TipoAnimalDAO();
         }
@@ -139,4 +165,12 @@ public class UserBean implements Serializable {
         return tiposDAO;
     }
 
+    @Produces
+    AgendamentoDAO instanceAgendamentoDAO() {
+        if (agendaDAO == null) {
+            agendaDAO = new AgendamentoDAO();
+        }
+
+        return agendaDAO;
+    }
 }
