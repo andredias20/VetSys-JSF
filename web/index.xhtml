@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+    
     <h:head>
         <title>Agendamento</title>
     </h:head>
@@ -62,14 +63,15 @@
                     <p:calendar id="horario" 
                                 value="#{userBean.horario}" 
                                 pattern="dd/MM/yyyy HH:mm"
-                                validator="#{agendamentoDateValidator}"
                                 validatorMessage="O funcionamento da clinica ocorre somente de Terça a Quinta das 08:00 até as 17:45 (15min de intervalo)"/>
                 </h:panelGroup>
             </p:panelGrid>
             <h:commandButton type="submit" value="Marcar" action="#{userBean.criar}"/>
+            
+        </h:form>
+        <h:form>
             <h:commandButton type="submit" value="Limpar" action="#{userBean.limpar}"/>
         </h:form>
-
         <p:dataTable id="tabAgendamentos" 
                      value="#{agendaBean.listAgendamento}" var="item">
 

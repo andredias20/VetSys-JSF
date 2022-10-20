@@ -9,7 +9,11 @@ import java.util.LinkedList;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
+import javax.faces.FacesException;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import model.Agendamento;
 import model.Paciente;
@@ -24,13 +28,13 @@ import model.Veterinario;
 @SessionScoped
 public class UserBean implements Serializable {
 
-    TipoAnimal tipoSelecionado;
-    Veterinario veterinarioSelecionado;
-    String nomeTutor;
-    String telefonetutor;
-    String nomeAnimal;
-    String motivo;
-    Date horario;
+    public static TipoAnimal tipoSelecionado;
+    public static Veterinario veterinarioSelecionado;
+    static String nomeTutor;
+    static String telefonetutor;
+    static String nomeAnimal;
+    static String motivo;
+    static Date horario;
 
     @Inject
     TipoAnimalDAO tiposDAO;
@@ -131,7 +135,9 @@ public class UserBean implements Serializable {
                 horario,
                 new Paciente(nomeAnimal, motivo, nomeTutor, telefonetutor)
         );
+
         agendaDAO.addAgendamento(agendamento);
+
     }
 
     public void limpar() {
@@ -143,8 +149,8 @@ public class UserBean implements Serializable {
         motivo = null;
         horario = null;
     }
-    
-    public void cancelar(Agendamento e){
+
+    public void cancelar(Agendamento e) {
         agendaDAO.removeAgendamento(e);
     }
 

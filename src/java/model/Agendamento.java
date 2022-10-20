@@ -99,6 +99,4 @@ public class Agendamento {
         }
         return Objects.equals(this.horario, other.horario);
     }
-    
-    
 }
