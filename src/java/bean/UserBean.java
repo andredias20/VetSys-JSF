@@ -31,6 +31,12 @@ public class UserBean implements Serializable {
     String nomeAnimal;
     String motivo;
     Date horario;
+    
+    String animalName;
+    String animalDescription;
+    
+    String vetNome;
+    int vetTipo;
 
     @Inject
     TipoAnimalDAO tiposDAO;
@@ -44,6 +50,57 @@ public class UserBean implements Serializable {
     LinkedList<SelectItem> veterinarioSelectItems;
 
     public UserBean() {
+    }
+    
+    public String vetRedirect(){
+        return "VetCad.xhtml";
+    }
+    public String animalRedirect(){
+        return "AnimalCad.xhtml";
+    }
+
+    public String getVetNome() {
+        return vetNome;
+    }
+
+    public void setVetNome(String vetNome) {
+        this.vetNome = vetNome;
+    }
+
+    public int getVetTipo() {
+        return vetTipo;
+    }
+
+    public void setVetTipo(int vetTipo) {
+        this.vetTipo = vetTipo;
+    }
+    
+    
+
+    public String getAnimalName() {
+        return animalName;
+    }
+
+    public void setAnimalName(String animalName) {
+        this.animalName = animalName;
+    }
+
+    public String getAnimalDescription() {
+        return animalDescription;
+    }
+
+    public void setAnimalDescription(String animalDescription) {
+        this.animalDescription = animalDescription;
+    }
+    
+    public String criarAnimal(){
+        tiposDAO.addTipoAnimal(new TipoAnimal(animalName, animalDescription));
+        return "index.xhtml";
+    }
+    
+    public String criarVeterinario(){
+        vetDAO.addVeterinario(new Veterinario(vetNome, vetTipo));
+        return "index.xhtml";
     }
 
     public TipoAnimal getTipoSelecionado() {

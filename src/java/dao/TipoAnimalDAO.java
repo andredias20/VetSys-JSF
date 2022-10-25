@@ -2,6 +2,7 @@ package dao;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import model.TipoAnimal;
 
@@ -11,8 +12,8 @@ import model.TipoAnimal;
  */
 public class TipoAnimalDAO implements Serializable {
 
-    LinkedList<TipoAnimal> tipoAnimalList = null;
-    LinkedList<SelectItem> tipoAnimalSelectItem = null;
+    private static LinkedList<TipoAnimal>  tipoAnimalList = null;
+    private static LinkedList<SelectItem> tipoAnimalSelectItem = null;
 
     public TipoAnimalDAO() {
         System.out.println("Criando TipoAnimalDAO");
@@ -36,6 +37,7 @@ public class TipoAnimalDAO implements Serializable {
     }
 
     public void addTipoAnimal(TipoAnimal t) {
+        t.setId(tipoAnimalList.size()+1);
         tipoAnimalList.add(t);
         processSelectItems();
     }
@@ -61,6 +63,15 @@ public class TipoAnimalDAO implements Serializable {
         tipoAnimalList.forEach(tipoAnimal -> {
             tipoAnimalSelectItem.add(new SelectItem(tipoAnimal, tipoAnimal.getNome()));
         });
+    }
+    
+
+    public void start(){
+        
+    }
+    
+    public void end(){
+        
     }
 
 }

@@ -16,9 +16,11 @@ import model.Paciente;
  *
  * @author andre
  */
+
+
 public class AgendamentoDAO implements Serializable{
 
-    private LinkedList<Agendamento> agendamentosList;
+    private static LinkedList<Agendamento> agendamentosList;
 
     public AgendamentoDAO() {
         if (agendamentosList == null) {
@@ -55,6 +57,15 @@ public class AgendamentoDAO implements Serializable{
     
     public void removeAgendamento(Agendamento e){
         agendamentosList.remove(e);
+    }
+    
+    
+    public void start(){
+        
+    }
+    
+    public void end(){
+        
     }
 
 }

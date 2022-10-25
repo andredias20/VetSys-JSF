@@ -13,13 +13,18 @@ public class Veterinario {
     public Veterinario() {
     }
 
+    public Veterinario(String nome, int tipo_animal_id){
+        this.nome = nome;
+        this.tipo_animal_id = tipo_animal_id;
+    }
+
     public Veterinario(int id, String nome, int tipo_animal_id) {
         this.id = id;
         this.nome = nome;
         this.tipo_animal_id = tipo_animal_id;
     }
-    
-    public Veterinario(int id, String nome, TipoAnimal tipo){
+
+    public Veterinario(int id, String nome, TipoAnimal tipo) {
         this.id = id;
         this.nome = nome;
         this.tipo_animal_id = tipo.getId();
@@ -48,5 +53,5 @@ public class Veterinario {
     public void setTipo_animal_id(int tipo_animal_id) {
         this.tipo_animal_id = tipo_animal_id;
     }
-    
+
 }

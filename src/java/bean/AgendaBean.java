@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -59,7 +60,18 @@ public class AgendaBean implements Serializable {
     
     @PostConstruct
     public void postInstance(){
+        tiposDAO.start();
+        vetDAO.start();
+        agendaDAO.start();
+        
         listAgendamento = agendaDAO.getAll();
+    }
+    
+    @PreDestroy
+    public void preDestroy(){
+        tiposDAO.end();
+        vetDAO.end();
+        agendaDAO.end();
     }
     
 }

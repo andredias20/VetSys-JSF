@@ -9,6 +9,10 @@
         <title>Agendamento</title>
     </h:head>
     <h:body>
+        <h:form >
+            <p:commandButton value="Cadatrar Veterinarios" action="#{userBean.vetRedirect}"/>
+            <p:commandButton value="Cadatrar Animais" action="#{userBean.animalRedirect}"/>
+        </h:form>
         <h:form id="agendaForm">
             <p:panelGrid columns="2" id="pnlForm">
                 <p:outputLabel for="animalType" value="Tipo Animal:"/>
@@ -62,11 +66,15 @@
                     <p:calendar id="horario" 
                                 value="#{userBean.horario}" 
                                 pattern="dd/MM/yyyy HH:mm"
-                                validator="#{agendamentoDateValidator}"
-                                validatorMessage="O funcionamento da clinica ocorre somente de Terça a Quinta das 08:00 até as 17:45 (15min de intervalo)"/>
+                                validator="#{agendamentoDateValidator.validate}"
+                                stepMinute="15"
+                                />
                 </h:panelGroup>
             </p:panelGrid>
             <h:commandButton type="submit" value="Marcar" action="#{userBean.criar}"/>
+        </h:form>
+        
+        <h:form>
             <h:commandButton type="submit" value="Limpar" action="#{userBean.limpar}"/>
         </h:form>
 

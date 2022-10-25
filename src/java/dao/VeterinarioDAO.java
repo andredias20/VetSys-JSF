@@ -15,8 +15,8 @@ import model.Veterinario;
 
 public class VeterinarioDAO implements Serializable {
 
-    LinkedList<Veterinario> veterinarioList = null;
-    LinkedList<SelectItem> veterinarioSelectItems = null;
+    private static LinkedList<Veterinario> veterinarioList = null;
+    private static LinkedList<SelectItem> veterinarioSelectItems = null;
 
     public VeterinarioDAO() {
         System.out.println("Criando VeterinarioDAO");
@@ -78,5 +78,20 @@ public class VeterinarioDAO implements Serializable {
                 -> vetSelectItems.add(new SelectItem(vet, vet.getNome())));
 
         return vetSelectItems;
+    }
+    
+    public void addVeterinario(Veterinario vet){
+        vet.setId(veterinarioList.size()+1);
+        veterinarioList.add(vet);
+        processSelectItems();
+    }
+
+    
+    public void start(){
+        
+    }
+    
+    public void end(){
+        
     }
 }

@@ -12,6 +12,14 @@ public class TipoAnimal implements Serializable{
     private String nome;
     private String descricao;
 
+    public TipoAnimal(){
+        
+    }
+    
+    public TipoAnimal(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
     public TipoAnimal(int id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
