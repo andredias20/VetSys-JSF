@@ -1,5 +1,6 @@
 package dao;
 
+import IO_Storage.IO_Veterinarios;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,22 +14,13 @@ import model.Veterinario;
  * @author andre
  */
 
-public class VeterinarioDAO implements Serializable {
+public final class VeterinarioDAO implements Serializable {
 
     private static LinkedList<Veterinario> veterinarioList = null;
     private static LinkedList<SelectItem> veterinarioSelectItems = null;
 
     public VeterinarioDAO() {
-        System.out.println("Criando VeterinarioDAO");
-        System.out.flush();
-
         veterinarioList = new LinkedList<Veterinario>();
-        veterinarioList.add(new Veterinario(1, "Dr. Carlos", 1));
-        veterinarioList.add(new Veterinario(2, "Dra. Vanessa", 1));
-        veterinarioList.add(new Veterinario(3, "Dra. Thais", 2));
-        veterinarioList.add(new Veterinario(4, "Dr. Gabriel", 2));
-
-        processSelectItems();
     }
 
     public Veterinario searchVeterinario(int id) {
@@ -81,17 +73,18 @@ public class VeterinarioDAO implements Serializable {
     }
     
     public void addVeterinario(Veterinario vet){
-        vet.setId(veterinarioList.size()+1);
+        vet.setId(veterinarioList.size());
         veterinarioList.add(vet);
         processSelectItems();
     }
 
     
     public void start(){
-        
+        veterinarioList = IO_Veterinarios.readItems();
+        processSelectItems();
     }
     
     public void end(){
-        
+        IO_Veterinarios.writeItems(veterinarioList);
     }
 }

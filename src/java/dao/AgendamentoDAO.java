@@ -5,6 +5,7 @@
  */
 package dao;
 
+import IO_Storage.IO_Agendamento;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
@@ -58,26 +59,11 @@ public class AgendamentoDAO implements Serializable{
     
     
     public void start(){
-        
+        agendamentosList = IO_Agendamento.readItems();
     }
     
     public void end(){
-        
-    }
-
-    @PostConstruct
-    public void post() {
-        if (agendamentosList == null) {
-            //Puxar itens gravados no 'arquivos/database'
-            agendamentosList = new LinkedList<>();
-            agendamentosList.add(new Agendamento(
-                    1,
-                    1,
-                    1,
-                    new Date(),
-                    new Paciente("Cachorrinho", "Probleminhas", "Carlos", "(45) 9 9833-8540"))
-            );
-        }
+        IO_Agendamento.writeItems(agendamentosList);
     }
 
 }

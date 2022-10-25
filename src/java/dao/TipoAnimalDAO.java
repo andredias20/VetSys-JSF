@@ -1,8 +1,8 @@
 package dao;
 
+import IO_Storage.IO_TipoAnimal;
 import java.io.Serializable;
 import java.util.LinkedList;
-import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import model.TipoAnimal;
 
@@ -10,21 +10,15 @@ import model.TipoAnimal;
  *
  * @author andre
  */
-public class TipoAnimalDAO implements Serializable {
+public final class TipoAnimalDAO implements Serializable {
 
-    private static LinkedList<TipoAnimal>  tipoAnimalList = null;
+    private static LinkedList<TipoAnimal> tipoAnimalList = null;
     private static LinkedList<SelectItem> tipoAnimalSelectItem = null;
 
     public TipoAnimalDAO() {
         System.out.println("Criando TipoAnimalDAO");
-        System.out.flush();
 
-        tipoAnimalList = new LinkedList<>();
-        tipoAnimalList.add(new TipoAnimal(1, "Cachorro", "Cachorros de todas as raças"));
-        tipoAnimalList.add(new TipoAnimal(2, "Gato", "Gato de todas as raças"));
-        tipoAnimalList.add(new TipoAnimal(3, "Aves", "Aves de todas as raças"));
-
-        processSelectItems();
+        
 
     }
 
@@ -37,7 +31,7 @@ public class TipoAnimalDAO implements Serializable {
     }
 
     public void addTipoAnimal(TipoAnimal t) {
-        t.setId(tipoAnimalList.size()+1);
+        t.setId(tipoAnimalList.size() + 1);
         tipoAnimalList.add(t);
         processSelectItems();
     }
@@ -64,14 +58,14 @@ public class TipoAnimalDAO implements Serializable {
             tipoAnimalSelectItem.add(new SelectItem(tipoAnimal, tipoAnimal.getNome()));
         });
     }
-    
 
-    public void start(){
-        
+    public void start() {
+        tipoAnimalList = IO_TipoAnimal.readItems();
+        processSelectItems();
     }
-    
-    public void end(){
-        
+
+    public void end() {
+        IO_TipoAnimal.writeItems(tipoAnimalList);
     }
 
 }

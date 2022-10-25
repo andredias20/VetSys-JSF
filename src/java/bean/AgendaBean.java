@@ -34,7 +34,7 @@ public class AgendaBean implements Serializable {
     @Inject
     AgendamentoDAO agendaDAO;
     
-    LinkedList<Agendamento> listAgendamento = null;
+    public static LinkedList<Agendamento> listAgendamento = null;
     
     public AgendaBean() {}
 
@@ -58,13 +58,37 @@ public class AgendaBean implements Serializable {
         this.listAgendamento = listAgendamento;
     }
     
+    @Produces
+    VeterinarioDAO instanceVeterinario() {
+        if (vetDAO == null) {
+            vetDAO = new VeterinarioDAO();
+        }
+        return vetDAO;
+    }
+
+    @Produces
+    TipoAnimalDAO instanceTipoAnimal() {
+        if (tiposDAO == null) {
+            tiposDAO = new TipoAnimalDAO();
+        }
+
+        return tiposDAO;
+    }
+
+    @Produces
+    AgendamentoDAO instanceAgendamentoDAO() {
+        if (agendaDAO == null) {
+            agendaDAO = new AgendamentoDAO();
+        }
+
+        return agendaDAO;
+    }
+    
     @PostConstruct
     public void postInstance(){
         tiposDAO.start();
         vetDAO.start();
         agendaDAO.start();
-        
-        listAgendamento = agendaDAO.getAll();
     }
     
     @PreDestroy

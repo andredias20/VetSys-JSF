@@ -17,7 +17,6 @@
                              required="true"
                              requiredMessage="Nome do animal é obrigatorio."/>
 
-
                 <p:outputLabel for="animalType" value="Tipo Animal:"/>
                 <p:selectOneMenu converter="#{tipoAnimalConverter}"
                                  required="true"
@@ -26,9 +25,13 @@
                                  value="#{userBean.vetTipo}">
                     <f:selectItems value="#{agendaBean.selectItemsTipoAnimal}"/>
                 </p:selectOneMenu>
+
             </p:panelGrid>
             <h:commandButton value="Gravar" action="#{userBean.criarVeterinario}"/>
 
+        </h:form>
+        <h:form >
+            <h:commandButton value="Voltar" action="index.xhtml"/>
         </h:form>
 
     </h:body>

@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alice/Documents/GitHub/Veterinaria_JavaWeb/web/index.xhtml</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/src/java/IO_Storage/IO_Veterinarios.java</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/src/java/dao/VeterinarioDAO.java</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/web/index.xhtml</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/src/java/bean/AgendaBean.java</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/src/java/dao/AgendamentoDAO.java</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/web/VetCad.xhtml</file>
+            <file>file:/C:/dev/Github/Veterinaria_JavaWeb/src/java/bean/UserBean.java</file>
         </group>
     </open-files>
 </project-private>

@@ -40,7 +40,7 @@ public class UserBean implements Serializable {
     String animalDescription;
     
     String vetNome;
-    int vetTipo;
+    TipoAnimal vetTipo;
 
     @Inject
     TipoAnimalDAO tiposDAO;
@@ -71,15 +71,13 @@ public class UserBean implements Serializable {
         this.vetNome = vetNome;
     }
 
-    public int getVetTipo() {
+    public TipoAnimal getVetTipo() {
         return vetTipo;
     }
 
-    public void setVetTipo(int vetTipo) {
+    public void setVetTipo(TipoAnimal vetTipo) {
         this.vetTipo = vetTipo;
     }
-    
-    
 
     public String getAnimalName() {
         return animalName;
@@ -103,7 +101,7 @@ public class UserBean implements Serializable {
     }
     
     public String criarVeterinario(){
-        vetDAO.addVeterinario(new Veterinario(vetNome, vetTipo));
+        vetDAO.addVeterinario(new Veterinario(vetNome, vetTipo.getId()));
         return "index.xhtml";
     }
 
@@ -209,31 +207,5 @@ public class UserBean implements Serializable {
 
     public void cancelar(Agendamento e) {
         agendaDAO.removeAgendamento(e);
-    }
-
-    @Produces
-    VeterinarioDAO instanceVeterinario() {
-        if (vetDAO == null) {
-            vetDAO = new VeterinarioDAO();
-        }
-        return vetDAO;
-    }
-
-    @Produces
-    TipoAnimalDAO instanceTipoAnimal() {
-        if (tiposDAO == null) {
-            tiposDAO = new TipoAnimalDAO();
-        }
-
-        return tiposDAO;
-    }
-
-    @Produces
-    AgendamentoDAO instanceAgendamentoDAO() {
-        if (agendaDAO == null) {
-            agendaDAO = new AgendamentoDAO();
-        }
-
-        return agendaDAO;
     }
 }
