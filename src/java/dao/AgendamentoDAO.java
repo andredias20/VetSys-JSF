@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.annotation.PostConstruct;
 import model.Agendamento;
 import model.Paciente;
 
@@ -23,24 +24,20 @@ public class AgendamentoDAO implements Serializable{
     private static LinkedList<Agendamento> agendamentosList;
 
     public AgendamentoDAO() {
-        if (agendamentosList == null) {
-            //Puxar itens gravados no 'arquivos/database'
-            agendamentosList = new LinkedList<>();
-            agendamentosList.add(new Agendamento(
-                    1,
-                    1,
-                    1,
-                    new Date(), 
-                    new Paciente("Cachorrinho", "Probleminhas", "Carlos", "(45) 9 9833-8540"))
-            );
-        }
     }
     
-    public LinkedList<Agendamento> getAll(){
+    public boolean contains(int veterinario_id, Date horario){
+//        new Agendamento(veterinario_id, veterinario_id, horario, );
+//        agendamentosList.contains()
+//        
+        return false;
+    }
+
+    public LinkedList<Agendamento> getAll() {
         return agendamentosList;
     }
-    
-    public void addAll(LinkedList<Agendamento> list){
+
+    public void addAll(LinkedList<Agendamento> list) {
         agendamentosList.addAll(list);
     }
 
@@ -48,14 +45,14 @@ public class AgendamentoDAO implements Serializable{
         if (agendamentosList.contains(e)) {
             return;
         } else {
-            if(e.getId() == 0){
-                e.setId(agendamentosList.size()+1);
+            if (e.getId() == 0) {
+                e.setId(agendamentosList.size() + 1);
             }
             agendamentosList.add(e);
         }
     }
-    
-    public void removeAgendamento(Agendamento e){
+
+    public void removeAgendamento(Agendamento e) {
         agendamentosList.remove(e);
     }
     
@@ -66,6 +63,21 @@ public class AgendamentoDAO implements Serializable{
     
     public void end(){
         
+    }
+
+    @PostConstruct
+    public void post() {
+        if (agendamentosList == null) {
+            //Puxar itens gravados no 'arquivos/database'
+            agendamentosList = new LinkedList<>();
+            agendamentosList.add(new Agendamento(
+                    1,
+                    1,
+                    1,
+                    new Date(),
+                    new Paciente("Cachorrinho", "Probleminhas", "Carlos", "(45) 9 9833-8540"))
+            );
+        }
     }
 
 }
