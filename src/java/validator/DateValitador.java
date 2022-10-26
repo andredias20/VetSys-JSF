@@ -32,7 +32,7 @@ public class DateValitador implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-
+        if(value == null) throw new ValidatorException(new FacesMessage("O data nao pode estar vazia"));
         var date = (Date) value;
         Calendar time = Calendar.getInstance();
         time.setTime(date);

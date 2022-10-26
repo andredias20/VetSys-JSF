@@ -31,7 +31,7 @@ public final class TipoAnimalDAO implements Serializable {
     }
 
     public void addTipoAnimal(TipoAnimal t) {
-        t.setId(tipoAnimalList.size() + 1);
+        t.setId(tipoAnimalList.size());
         tipoAnimalList.add(t);
         processSelectItems();
     }

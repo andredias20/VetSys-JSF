@@ -7,12 +7,8 @@ package dao;
 
 import IO_Storage.IO_Agendamento;
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.Date;
 import java.util.LinkedList;
-import javax.annotation.PostConstruct;
 import model.Agendamento;
-import model.Paciente;
 
 /**
  *
@@ -22,18 +18,11 @@ import model.Paciente;
 
 public class AgendamentoDAO implements Serializable{
 
-    private static LinkedList<Agendamento> agendamentosList;
+    private static LinkedList<Agendamento> agendamentosList = null;
 
     public AgendamentoDAO() {
     }
-    
-    public boolean contains(int veterinario_id, Date horario){
-//        new Agendamento(veterinario_id, veterinario_id, horario, );
-//        agendamentosList.contains()
-//        
-        return false;
-    }
-
+   
     public LinkedList<Agendamento> getAll() {
         return agendamentosList;
     }
@@ -43,12 +32,14 @@ public class AgendamentoDAO implements Serializable{
     }
 
     public void addAgendamento(Agendamento e) {
+        System.out.println("Passou pela adicao");
         if (agendamentosList.contains(e)) {
             return;
         } else {
             if (e.getId() == 0) {
-                e.setId(agendamentosList.size() + 1);
+                e.setId(agendamentosList.size());
             }
+            System.out.println("Executou o metodo");
             agendamentosList.add(e);
         }
     }

@@ -3,6 +3,7 @@ package IO_Storage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
@@ -32,8 +33,7 @@ public class IO_Veterinarios {
 
             lista = (LinkedList<Veterinario>) ois.readObject();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
         }
 
         return lista;

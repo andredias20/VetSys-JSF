@@ -1,14 +1,16 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author andre
  */
-public class Veterinario {
+public class Veterinario implements Serializable{
 
-    private int id;
+    private Integer id;
     private String nome;
-    private int tipo_animal_id;
+    private Integer tipo_animal_id;
 
     public Veterinario() {
     }
@@ -30,11 +32,11 @@ public class Veterinario {
         this.tipo_animal_id = tipo.getId();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,5 +55,12 @@ public class Veterinario {
     public void setTipo_animal_id(int tipo_animal_id) {
         this.tipo_animal_id = tipo_animal_id;
     }
+
+    @Override
+    public String toString() {
+        return "Veterinario{" + "id=" + id + ", nome=" + nome + ", tipo_animal_id=" + tipo_animal_id + '}';
+    }
+    
+    
 
 }

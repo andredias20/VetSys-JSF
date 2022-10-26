@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author andre
  */
-public class Paciente {
+public class Paciente implements Serializable{
     
-    private int id;
+    private Integer id;
     private String nomeAnimal;
     private String descricaoMotivo;
     private String nomeTutor;

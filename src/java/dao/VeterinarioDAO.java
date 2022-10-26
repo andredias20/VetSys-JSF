@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.enterprise.inject.Model;
 import javax.faces.model.SelectItem;
 import model.Veterinario;
 
@@ -34,7 +33,7 @@ public final class VeterinarioDAO implements Serializable {
     public List<Veterinario> searchVeterinariosByAnimalType(int id) {
        return veterinarioList
                 .stream()
-                .filter(vet -> vet.getId() == id)
+                .filter(vet -> vet.getTipo_animal_id() == id)
                 .collect(Collectors.toList());
         
         
@@ -64,7 +63,7 @@ public final class VeterinarioDAO implements Serializable {
 
     private LinkedList<SelectItem> processSelectItems(List<Veterinario> list) {
         LinkedList<SelectItem> vetSelectItems = new LinkedList<SelectItem>();
-
+        
         vetSelectItems.add(new SelectItem(null, "Selecione um Veterinario"));
         list.forEach(vet
                 -> vetSelectItems.add(new SelectItem(vet, vet.getNome())));
@@ -73,8 +72,10 @@ public final class VeterinarioDAO implements Serializable {
     }
     
     public void addVeterinario(Veterinario vet){
+        if(vet.getId() == null)
         vet.setId(veterinarioList.size());
         veterinarioList.add(vet);
+        System.out.println("Processando itens | Valor Adicionado: "+vet);
         processSelectItems();
     }
 

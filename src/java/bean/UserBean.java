@@ -97,11 +97,15 @@ public class UserBean implements Serializable {
     
     public String criarAnimal(){
         tiposDAO.addTipoAnimal(new TipoAnimal(animalName, animalDescription));
+        animalName = "";
+        animalDescription = "";
         return "index.xhtml";
     }
     
     public String criarVeterinario(){
         vetDAO.addVeterinario(new Veterinario(vetNome, vetTipo.getId()));
+        vetNome = "";
+        vetTipo = null;
         return "index.xhtml";
     }
 
@@ -133,10 +137,12 @@ public class UserBean implements Serializable {
                     ));
             return veterinarioSelectItems;
         }
-
-        return veterinarioSelectItems
-                = vetDAO.getSelectItems(
-                        tipoSelecionado.getId());
+        LinkedList<SelectItem> selectItems = vetDAO.getSelectItems(
+                tipoSelecionado.getId());
+        
+        System.out.println("Select Items: ");
+        
+        return veterinarioSelectItems = selectItems;
     }
 
     public void setVeterinarioSelectItems(LinkedList<SelectItem> veterinarioSelectItems) {
@@ -192,7 +198,7 @@ public class UserBean implements Serializable {
         );
 
         agendaDAO.addAgendamento(agendamento);
-
+        limpar();
     }
 
     public void limpar() {

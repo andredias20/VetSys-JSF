@@ -43,6 +43,7 @@ public class AgendaBean implements Serializable {
     }
 
     public LinkedList<Agendamento> getListAgendamento() {
+        listAgendamento = agendaDAO.getAll();
         return listAgendamento;
     }
     

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,11 +8,11 @@ import java.util.Objects;
  *
  * @author andre
  */
-public class Agendamento {
+public class Agendamento implements Serializable{
     
-    private int id;
-    private int veterinario_id;
-    private int tipo_id;
+    private Integer id;
+    private Integer veterinario_id;
+    private Integer tipo_id;
     private Date horario;
     private Paciente paciente;
 
